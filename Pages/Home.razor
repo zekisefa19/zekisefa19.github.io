@@ -1,0 +1,302 @@
+﻿@page "/"
+@inject IJSRuntime JS
+
+<nav class="navbar">
+    <div class="nav-inner">
+        <a href="#" class="brand">
+            <span class="brand-dot"></span>
+            zeki.sefa
+        </a>
+        <div class="nav-links">
+            <a href="#projeler">Projeler</a>
+            <a href="#deneyim">Deneyim & Eğitim</a>
+            <a href="#yetenekler">Yetenekler</a>
+            <a href="#iletisim">İletişim</a>
+        </div>
+    </div>
+</nav>
+
+<main class="container">
+   <!-- GİRİŞ (HERO) BÖLÜMÜ -->
+    <section class="hero">
+        <div>
+            <div class="hero-identity">
+                <div class="profile-avatar-ring">
+                    <img src="images/profil.jpg" alt="Zeki Sefa İçtüzer" class="profile-avatar" />
+                </div>
+                <div>
+                    <div class="status-pill" style="margin-bottom: 0.65rem;">Bilgisayar Mühendisi • C# & .NET Ekosistemi</div>
+                    <h1 style="margin-bottom: 0;">
+                        Zeki Sefa İçtüzer <br />
+                        <span class="text-gradient">Backend & AI Sistem Mimarisi</span>
+                    </h1>
+                </div>
+            </div>
+            <p class="hero-summary">
+                C# ve .NET odaklı kurumsal backend sistemleri, legacy-modern servis entegrasyonları (SOAP/REST)
+                ve yapay zekâ destekli (LLM/RAG, OpenCV, YOLO) çözümler geliştiren Bilgisayar Mühendisi.
+            </p>
+            <div class="hero-actions">
+                <a href="#projeler" class="btn-primary">Projeleri İncele</a>
+                <a href="https://github.com/zekisefa19" target="_blank" class="btn-secondary">GitHub Profilim</a>
+            </div>
+        </div>
+
+        <div class="architecture-card">
+            <div class="card-header-bar">
+                <div class="dots"><span></span><span></span><span></span></div>
+                <span>SystemDomains.cs</span>
+            </div>
+            <div class="domain-list">
+                @foreach (var alan in UzmanlikAlanlari)
+                {
+                    <div class="domain-item @(SeciliAlan == alan.Baslik ? "active" : "")"
+                         @onclick="() => SeciliAlan = alan.Baslik">
+                        <span class="domain-title">@alan.Baslik</span>
+                        <span class="domain-tech">@alan.Etiket</span>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJELER & VİDEO ANİMASYON SAHNELERİ -->
+    <section id="projeler" class="section-block">
+        <div class="section-header">
+            <span class="section-tag">// CANLI MİMARİ AKIŞLARI</span>
+            <h2>Seçilmiş Projeler & Sistem Senaryoları</h2>
+        </div>
+
+        <div class="projects-grid">
+
+            <!-- PROJE 1: SmartDoc RAG System -->
+            <article class="project-card">
+                <div class="video-stage">
+                    <span class="video-badge">RAG • Vector DB</span>
+                    <video src="videos/rag-demo.mp4" autoplay loop muted playsinline preload="auto"></video>
+                </div>
+
+                <div class="project-body">
+                    <div class="project-meta">LLM & RAG Mimarisi • .NET 9</div>
+                    <h3>SmartDoc RAG System</h3>
+                    <p>
+                        PDF ve DOCX belgelerini vektör veritabanına aktaran, Semantic Kernel ve LLM ile haberleşen akıllı doküman analiz platformu.
+                        Server-Sent Events (SSE) ile anlık yanıt akışı, dinamik kaynak gösterimi ve Web Speech API ile sesli etkileşim sunar.
+                    </p>
+                    <div class="tech-stack">
+                        <span class="tech-chip">.NET 9</span>
+                        <span class="tech-chip">Semantic Kernel</span>
+                        <span class="tech-chip">Vector DB</span>
+                        <span class="tech-chip">SSE</span>
+                        <span class="tech-chip">Web Speech API</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- PROJE 2: Akıllı Kasiyer Sistemi -->
+            <article class="project-card">
+                <div class="video-stage">
+                    <span class="video-badge">YOLO + OpenCV POS</span>
+                    <video src="videos/kasiyer-demo.mp4" autoplay loop muted playsinline preload="auto"></video>
+                </div>
+
+                <div class="project-body">
+                    <div class="project-meta">Bilgisayar Mühendisliği Bitirme Projesi</div>
+                    <h3>Akıllı Kasiyer Sistemi</h3>
+                    <p>
+                        YOLO algoritması ve OpenCV görüntü işleme ile ürünleri kameradan gerçek zamanlı tanıyan otonom kasa sistemi.
+                        Tanınan ürünleri veritabanıyla eşleştirerek otomatik faturalandırma, ödeme ve canlı stok güncelleme süreçlerini yönetir.
+                    </p>
+                    <div class="tech-stack">
+                        <span class="tech-chip">YOLO</span>
+                        <span class="tech-chip">OpenCV</span>
+                        <span class="tech-chip">Python</span>
+                        <span class="tech-chip">Backend API</span>
+                        <span class="tech-chip">Stok & Fatura DB</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- PROJE 3: Smart Transit -->
+            <article class="project-card">
+                <div class="video-stage">
+                    <span class="video-badge">Ollama AI & CQRS</span>
+                    <video src="videos/transit-demo.mp4" autoplay loop muted playsinline preload="auto"></video>
+                </div>
+
+                <div class="project-body">
+                    <div class="project-meta">İGÜ Robotik Uygulama ve Araştırma Merkezi</div>
+                    <h3>Smart Transit — Akıllı Ulaşım Platformu</h3>
+                    <p>
+                        ASP.NET Core ve React (TypeScript) ile CQRS mimarisinde geliştirilen uçtan uca ulaşım yönetim sistemi.
+                        EF Core Optimistic Locking ile biniş tutarlılığı ve Ollama altyapısıyla yapay zekâ destekli sahtekarlık tespiti (fraud detection) sağlar.
+                    </p>
+                    <div class="tech-stack">
+                        <span class="tech-chip">ASP.NET Core</span>
+                        <span class="tech-chip">CQRS</span>
+                        <span class="tech-chip">PostgreSQL</span>
+                        <span class="tech-chip">Redis</span>
+                        <span class="tech-chip">Ollama AI</span>
+                        <span class="tech-chip">React & TS</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- PROJE 4: Banka Transfer Sistemi -->
+            <article class="project-card">
+                <div class="video-stage">
+                    <span class="video-badge">SOAP ⇄ REST Bridge</span>
+                    <video src="videos/banka-demo.mp4" autoplay loop muted playsinline preload="auto"></video>
+                </div>
+
+                <div class="project-body">
+                    <div class="project-meta">Şekerbank T.A.Ş. • .NET Yazılım Geliştirme Stajı</div>
+                    <h3>Banka Transfer Sistemi (SOAP - REST Entegrasyonu)</h3>
+                    <p>
+                        .NET Framework 4.5.2 tabanlı legacy SOAP servisi ile .NET 8 REST API arasında çift yönlü XML/JSON veri dönüşümü sağlayan entegrasyon mimarisi.
+                        Bankacılık transferlerinde transaction yönetimi, hata kontrolü ve MSSQL veri süreçlerini yürütür.
+                    </p>
+                    <div class="tech-stack">
+                        <span class="tech-chip">.NET 8 REST</span>
+                        <span class="tech-chip">.NET Framework 4.5.2</span>
+                        <span class="tech-chip">SOAP / WCF</span>
+                        <span class="tech-chip">XML & JSON</span>
+                        <span class="tech-chip">MSSQL</span>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+    <!-- DENEYİM & EĞİTİM -->
+    <section id="deneyim" class="section-block">
+        <div class="section-header">
+            <span class="section-tag">// KARİYER & AKADEMİK GEÇMİŞ</span>
+            <h2>Deneyim & Eğitim</h2>
+        </div>
+
+        <div class="timeline-grid">
+            <div class="timeline-list">
+                <div class="timeline-card">
+                    <span class="timeline-date">Temmuz 2026 - Eylül 2026</span>
+                    <h3>Yazılım Geliştirme Stajyeri — Smart Transit</h3>
+                    <div class="timeline-org">İstanbul Gelişim Üniversitesi Robotik Uygulama ve Araştırma Merkezi</div>
+                    <ul class="timeline-points">
+                        <li>ASP.NET Core ve React (TypeScript) ile CQRS mimarisi, PostgreSQL ve Redis kullanarak full-stack ulaşım platformu geliştirdi.</li>
+                        <li>EF Core Optimistic Locking ile biniş geçişlerinde veri tutarlılığını, JWT ve RBAC ile yetkilendirme güvenliğini kurguladı.</li>
+                        <li>Ollama altyapısıyla yapay zekâ destekli sahtekarlık tespiti (fraud detection) ve akıllı asistan modülünü entegre etti.</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-card">
+                    <span class="timeline-date">Temmuz 2025 - Ağustos 2025</span>
+                    <h3>.NET Yazılım Geliştirme Stajyeri — Banka Transfer Sistemi</h3>
+                    <div class="timeline-org">Şekerbank Türk Anonim Şirketi</div>
+                    <ul class="timeline-points">
+                        <li>.NET Framework 4.5.2 SOAP servisi ile .NET 8 tabanlı REST API arasında XML/JSON veri dönüşüm süreçlerini geliştirdi.</li>
+                        <li>Bankacılık transfer işlemleri için transaction yönetimini, iş mantığını ve hata mekanizmalarını REST API tarafında kurguladı.</li>
+                        <li>MSSQL veritabanı ile veri yönetimi ve işlem süreçlerini uçtan uca yürüttü.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="edu-card">
+                <span class="timeline-date">Eylül 2022 - Eylül 2026</span>
+                <h3>Bilgisayar Mühendisliği (Lisans)</h3>
+                <div class="edu-school">İstanbul Gelişim Üniversitesi • Mühendislik Fakültesi</div>
+                <p style="color:var(--text-secondary); font-size:0.9rem; margin-bottom:1rem;">
+                    Backend sistem mimarileri, dağıtık veritabanı tasarımı, görüntü işleme ve yapay zekâ tabanlı yazılım çözümleri üzerine odaklanıldı.
+                </p>
+                <div class="edu-meta">
+                    <span class="tech-chip">İstanbul / Sultangazi</span>
+                    <span class="tech-chip">İngilizce (Orta Seviye)</span>
+                    <span class="tech-chip">B Sınıfı Ehliyet</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- YETENEK MATRİSİ -->
+    <section id="yetenekler" class="section-block">
+        <div class="section-header">
+            <span class="section-tag">// TEKNİK YIĞIN</span>
+            <h2>Yetenekler & Teknolojiler</h2>
+        </div>
+
+        <div class="skills-grid">
+            @foreach (var grup in YetenekGruplari)
+            {
+                <div class="skill-group">
+                    <h3>@grup.Kategori</h3>
+                    <div class="skill-tags">
+                        @foreach (var yetenek in grup.Ogeler)
+                        {
+                            <span class="skill-pill">@yetenek</span>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    </section>
+
+    <!-- İLETİŞİM -->
+    <section id="iletisim" class="section-block" style="border-bottom:none;">
+        <div class="contact-box">
+            <span class="section-tag">// BAĞLANTI KUR</span>
+            <h2>Birlikte Çalışalım</h2>
+            <p>
+                C# / .NET backend geliştirme, sistem entegrasyonları veya yapay zekâ destekli yazılım projeleri için doğrudan iletişime geçebilirsin.
+            </p>
+            <div class="contact-actions">
+                <a href="mailto:zekisefa19@gmail.com" class="btn-primary">zekisefa19@gmail.com</a>
+                <button class="copy-btn" @onclick="EpostayiKopyala">
+                    @(EpostaKopyalandi ? "✓ E-posta Kopyalandı" : "E-postayı Kopyala")
+                </button>
+                <a href="https://github.com/zekisefa19" target="_blank" class="btn-secondary">GitHub (zekisefa19)</a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="site-footer">
+    <div class="container">
+        © @DateTime.Now.Year Zeki Sefa İçtüzer • C# & Blazor WebAssembly ile geliştirildi.
+    </div>
+</footer>
+
+@code {
+    private string SeciliAlan = "Kurumsal Backend & API";
+    private record UzmanlikModel(string Baslik, string Etiket);
+
+    private List<UzmanlikModel> UzmanlikAlanlari = new()
+    {
+        new("Kurumsal Backend & API", ".NET 8/9 • REST • SOAP/WCF"),
+        new("Yapay Zekâ & RAG Sistemleri", "Semantic Kernel • Ollama • SSE"),
+        new("Görüntü İşleme & Otomasyon", "OpenCV • YOLO • Python"),
+        new("Veri & Dağıtık Mimari", "MSSQL • PostgreSQL • Redis • CQRS")
+    };
+
+    private record YetenekGrupModel(string Kategori, string[] Ogeler);
+
+    private List<YetenekGrupModel> YetenekGruplari = new()
+    {
+        new("Programlama Dilleri", new[] { "C#", "C", "C++", "Python", "TypeScript" }),
+        new("Backend & Mimari", new[] { ".NET 8", ".NET 9", "ASP.NET Core", ".NET Framework", "REST API", "SOAP", "WCF", "EF Core", "JWT", "RBAC", "CORS", "Semantic Kernel", "SSE" }),
+        new("Veritabanı & Altyapı", new[] { "MSSQL", "PostgreSQL", "MySQL", "MongoDB", "Redis", "Docker" }),
+        new("Yapay Zekâ & Görüntü İşleme", new[] { "Makine Öğrenmesi", "Derin Öğrenme", "OpenCV", "YOLO", "LLM", "RAG", "Ollama" }),
+        new("Veri & Kurumsal Sistemler", new[] { "JSON", "XML", "Veri Modelleme", "Veri Normalizasyonu", "Veri Görselleştirme", "API Entegrasyonu", "ERP", "CRM" })
+    };
+
+    private bool EpostaKopyalandi;
+
+    private async Task EpostayiKopyala()
+    {
+        await JS.InvokeVoidAsync("navigator.clipboard.writeText", "zekisefa19@gmail.com");
+        EpostaKopyalandi = true;
+        StateHasChanged();
+        await Task.Delay(2500);
+        EpostaKopyalandi = false;
+        StateHasChanged();
+    }
+}
